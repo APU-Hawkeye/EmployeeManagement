@@ -30,7 +30,9 @@ class UsersController extends AppController
             'login',
             'logout',
         ]);
-        $this->Users = TableRegistry::getTableLocator()->get('Users');
+        /** @var UsersTable $users */
+        $users = TableRegistry::getTableLocator()->get('Users');
+        $this->Users = $users;
         parent::beforeFilter($event);
     }
 
