@@ -26,18 +26,18 @@ $sidebarItems = [
         "label" => __("Employees"),
         "icon" => "users",
         "url" => $this->Url->build([
-            "controller" => "Users",
+            "controller" => "Employees",
             "action" => "index"
         ]),
-        "is_active" => $controller === "Users" && $action === "index"
+        "is_active" => $controller === "Employees" && $action === "index"
     ], [
         "label" => __("Department"),
         "icon" => "database",
         "url" => $this->Url->build([
-            "controller" => "Users",
+            "controller" => "Departments",
             "action" => "index"
         ]),
-        "is_active" => $controller === "Users" && $action === "index"
+        "is_active" => $controller === "Departments" && $action === "index"
     ], [
         "label" => __("Logout"),
         "icon" => "log-out",
