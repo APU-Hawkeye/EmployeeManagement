@@ -11,8 +11,17 @@ $this->Html->css([
 ?>
     <div class="content-header">
         <div>
-            <h4 class="mg-b-0 tx-spacing-2"><i data-feather="globe" class="mr-2"></i><?php echo __('Employees') ?></h4>
+            <h4 class="mg-b-0 tx-spacing-2"><i data-feather="users" class="mr-2"></i><?php echo __('Employees') ?></h4>
         </div>
+        <nav class="nav">
+            <a href="<?php echo $this->Url->build([
+                'controller' => 'Employees',
+                "action" =>'add',
+                '?' => [
+                    'referer' => $this->getRequest()->getRequestTarget()
+                ]
+            ])?>" class="nav-link"><i data-feather="plus-circle"></i></a>
+        </nav>
     </div>
     <div class="content-body p-0">
         <div class="px-3 py-4 bg-light border-bottom">
@@ -64,6 +73,7 @@ $this->Html->css([
                     <th  style="width:1%"></th>
                     <th class="tx-13 tx-spacing-2"><?php echo  __('Name') ?></th>
                     <th class="tx-13 tx-spacing-2"><?php echo  __('Email') ?></th>
+                    <th class="tx-13 tx-spacing-2"><?php echo  __('Phone') ?></th>
                     <th class="tx-13 tx-spacing-2"><?php echo  __('Salary') ?></th>
                     <th class="tx-13 tx-spacing-2"><?php echo  __('Status') ?></th>
                 </tr>
@@ -86,6 +96,7 @@ $this->Html->css([
                                 ]) ?>"><?php echo __("View")?> </a></td>
                             <td class="tx-12 tx-spacing-2"><?php echo $employee->first_name. ' ' . $employee->last_name; ?></td>
                             <td class="tx-12 tx-spacing-2"><?php echo $employee->email; ?></td>
+                            <td class="tx-12 tx-spacing-2"><?php echo $employee->phone; ?></td>
                             <td class="tx-12 tx-spacing-2"><?php echo $employee->salary; ?></td>
                             <td class="tx-12 tx-spacing-2"><?php echo $employee->status; ?></td>
                         </tr>
