@@ -29,9 +29,9 @@ class CreateEmployeesTable extends AbstractMigration
             ])
             ->addColumn('last_name', 'text')
             ->addColumn('dob', 'date')
-            ->addColumn('phone', 'integer')
+            ->addColumn('phone', \Phinx\Util\Literal::from('bigint'))
             ->addColumn('email', 'string')
-            ->addColumn('photo', 'text')
+            ->addColumn('image_file', 'text')
             ->addColumn('salary', 'integer')
             ->addColumn('status', \Phinx\Util\Literal::from('emp_status'), [
                 'default' => 'ACTIVE',
