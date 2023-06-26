@@ -127,7 +127,7 @@ class EmployeesController extends AppController
     }
 
     /**
-     * @param string|null $id
+     * @param string|null $id Employee ID
      * @return void
      */
     public function view(?string $id = null)
@@ -144,9 +144,25 @@ class EmployeesController extends AppController
         $this->set('employee', $employee);
     }
 
-
     public function delete(?string $id = null)
     {
         $employee = $this->Employees->get($id);
+    }
+
+    /**
+     * @return void
+     */
+    public function highestSalary()
+    {
+        $query = $this->Employees->find();
+        $query->select([
+                'department_name' => 'Departments.name',
+                'highest_salary' => $query->func()->max('salary')
+            ])
+            ->innerJoinWith('Departments')
+            ->group('Departments.name');
+
+        $salaries = $this->paginate($query);
+        $this->set('salaries', $salaries);
     }
 }
