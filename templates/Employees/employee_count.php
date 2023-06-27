@@ -6,7 +6,7 @@
 ?>
 <div class="content-header">
     <div>
-        <h4 class="mg-b-0 tx-spacing-2"><i data-feather="bar-chart" class="mr-2"></i><?php echo __('Highest Salaries') ?></h4>
+        <h4 class="mg-b-0 tx-spacing-2"><i data-feather="users" class="mr-2"></i><?php echo __('Employee Count by Salary') ?></h4>
     </div>
 </div>
 <?php echo $this->Flash->render(); ?>
