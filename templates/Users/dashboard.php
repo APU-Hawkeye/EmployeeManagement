@@ -39,6 +39,20 @@
                     ]
                 ]) ?>" class="btn btn-outline-primary tx-medium"><?php echo __("Youngest Employee"); ?></a>
             </div>
+        </div><!-- col-6 -->
+        <div class="col-sm-3 d-flex align-items-stretch">
+            <div class="bg-white bd pd-20 pd-lg-30 w-100 mb-4">
+                <div class="mg-b-25"><i data-feather="users" class="wd-50 ht-50 tx-gray-500"></i></div>
+                <h5 class="tx-inverse mg-b-20"><?php echo __("Employee Count") ?></h5>
+                <p class="mg-b-20"><?php echo __("Find salary range wise employee count details") ?></p>
+                <a href="<?php echo $this->Url->build([
+                    'controller' => 'Employees',
+                    'action' => 'employeeCount',
+                    '?' => [
+                        'referer' => $this->getRequest()->getRequestTarget()
+                    ]
+                ]) ?>" class="btn btn-outline-primary tx-medium"><?php echo __("Employee Count"); ?></a>
+            </div>
         </div>
     </div>
 </div>
