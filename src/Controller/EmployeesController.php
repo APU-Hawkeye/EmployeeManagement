@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Model\Table\EmployeesTable;
+use Cake\Database\Expression\QueryExpression;
 use Cake\Event\EventInterface;
 use Cake\ORM\TableRegistry;
 
@@ -164,5 +165,38 @@ class EmployeesController extends AppController
 
         $salaries = $this->paginate($query);
         $this->set('salaries', $salaries);
+        $this->set('titleForLayout', __('highest Salary'));
+    }
+
+    /**
+     * @return void
+     */
+    public function youngestEmployee()
+    {
+        $subQuery = $this->Employees->find();
+        $subQuery
+            ->select([
+                'age' => $subQuery->func()->min($subQuery->func()->extract('YEAR', 'AGE(NOW(), Employees.dob)'))
+            ])
+            ->group('Employees.department_id');
+        $query = $this->Employees->find();
+        $query
+            ->select([
+                'first_name' => 'Employees.first_name',
+                'last_name' => 'Employees.last_name',
+                'department_name' => 'Departments.name',
+                'min_age' => 'EXTRACT(YEAR FROM AGE(NOW(), Employees.dob))'
+            ])
+            ->innerJoinWith('Departments')
+            ->where(function (QueryExpression $expression) use ($subQuery) {
+                return $expression->in(
+                    'EXTRACT(YEAR FROM AGE(NOW(), Employees.dob))',
+                    $subQuery
+                );
+            });
+
+        $employees = $this->paginate($query);
+        $this->set('employees', $employees);
+        $this->set('titleForLayout', __('Youngest Employees'));
     }
 }
