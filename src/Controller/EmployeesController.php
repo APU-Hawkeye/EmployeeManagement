@@ -199,4 +199,29 @@ class EmployeesController extends AppController
         $this->set('employees', $employees);
         $this->set('titleForLayout', __('Youngest Employees'));
     }
+
+    /**
+     * @return void
+     */
+    public function employeeCount()
+    {
+        $query = $this->Employees->find();
+        $query
+            ->select([
+                'salary_range' => $query->newExpr("CASE
+                    WHEN salary <= 30000 THEN '0-30000'
+                    WHEN salary <= 60000 THEN '30001-60000'
+                    WHEN salary <= 100000 THEN '60001-100000'
+                    ELSE '100000+'
+                    END"),
+                'employee_count' => $query->func()->count('*')
+            ])
+            ->group('salary_range')
+            ->orderAsc('salary_range');
+
+        $employees = $this->paginate($query);
+        $this->set('employees', $employees);
+        $this->set('titleForLayout', __('Employee Count'));
+
+    }
 }
