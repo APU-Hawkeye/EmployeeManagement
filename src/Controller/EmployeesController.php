@@ -150,9 +150,23 @@ class EmployeesController extends AppController
         $this->set('employee', $employee);
     }
 
+    /**
+     * @param string|null $id
+     * @return \Cake\Http\Response|void|null
+     */
     public function delete(?string $id = null)
     {
         $employee = $this->Employees->get($id);
+        try {
+            $this->Employees->deleteOrFail($employee);
+            $this->Flash->success('Employee successfully deleted');
+            return $this->redirect([
+                'action' => 'index',
+            ]);
+        } catch (\Cake\ORM\Exception\PersistenceFailedException $e) {
+            echo $e->getEntity();
+            $this->Flash->error('Something went wrong please try again');
+        }
     }
 
     /**
