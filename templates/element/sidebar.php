@@ -71,7 +71,7 @@ $sidebarItems = [
         <a href="<?php echo $this->Url->build([
             'controller' => 'Users',
             'action' => 'dashboard',
-        ])?>" class="aside-logo tx-20 tx-spacing-2 text-success"><?php echo $this->Html->image('cake-logo.png', ['alt'=>'cakeLogo']) ?>
+        ])?>" class="aside-logo tx-20 tx-spacing-2 text-success"><?php echo $this->Html->image('emp-logo.jpg', ['alt'=>'emp']) ?>
         </a>
         <a href="" class="aside-menu-link">
             <i data-feather="menu"></i>

@@ -39,7 +39,7 @@
             <div class="card mg-t-100">
                 <div class="card-body bg-gray-100">
                     <div class="mb-3 tx-center">
-                        <a href="" class="df-logo tx-spacing-2 mt-1"><?php echo $this->Html->image('cake-logo.png', ['alt'=>'cake logo']) ?></span></a>
+                        <a href="" class="df-logo tx-spacing-2 mt-1"><?php echo $this->Html->image('emp-logo.jpg', ['alt'=>'emp']) ?></span></a>
                     </div>
                     <h4 class="tx-spacing-2"><?php echo __("Sign In"); ?></h4>
                     <p class="tx-color-03 tx-spacing-2"><?php echo __("Welcome back! Please login to continue."); ?></p>
