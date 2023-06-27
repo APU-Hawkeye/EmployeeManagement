@@ -3,12 +3,43 @@
  * @var App\View\AppView $this
  * @var \App\Model\Entity\Employee $employee
  */
+$this->Html->css([
+    "/lib/semantic-ui/dropdown/dropdown.min",
+    "/lib/semantic-ui/transition/transition.min",
+], ["block" => true]);
 ?>
+
 <div class="content-header">
     <div>
         <h4 class="mg-b-0 tx-spacing-2"><i data-feather="user" class="mr-2"></i>
             <?php echo 'Employee - '. $employee->first_name.' '.$employee->last_name; ?></h4>
     </div>
+    <nav class="nav">
+        <div class="ui nav-link icon top left pointing dropdown">
+            <i data-feather="settings" class="icon"></i>
+            <div class="menu">
+                <div class="item tx-spacing-2"><a href="<?php echo $this->Url->build([
+                        'controller' => 'Employees',
+                        'action' => 'edit',
+                        $employee->id,
+                        '?' => [
+                            'referer' => $this->getRequest()->getRequestTarget()
+                        ]
+                    ]); ?>" class="text-dark d-block"><i data-feather="edit"></i>
+                        <?php echo __("Edit"); ?>
+                    </a>
+                </div>
+                <div class="item tx-spacing-2"><a href="<?php echo $this->Url->build([
+                        'controller' => 'Employees',
+                        'action' => 'delete',
+                        $employee->id,
+                    ]); ?>" class="text-dark d-block"><i data-feather="trash"></i>
+                        <?php echo __("Delete"); ?>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
 </div>
 <div class="content-body">
     <?php echo $this->Flash->render(); ?>
@@ -47,3 +78,17 @@
         </div>
     </div>
 </div>
+<?php $this->Html->script([
+    "/lib/semantic-ui/transition/transition.min",
+    "/lib/semantic-ui/dropdown/dropdown.min",
+], [
+    'block' => 'scriptBottom'
+]); ?>
+<?php $this->Html->scriptStart([ 'block' => 'scriptBottom' ]); ?>
+$(function(){
+    $('.ui.dropdown').dropdown({
+        selectOnKeydown: false,
+        forceSelection: false
+    });
+})
+<?php $this->Html->scriptEnd(); ?>
