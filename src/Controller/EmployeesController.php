@@ -100,7 +100,11 @@ class EmployeesController extends AppController
      */
     public function edit(?string $id = null)
     {
-        $employee = $this->Employees->get($id);
+        $employee = $this->Employees->get($id, [
+            'contain' => [
+                'Departments',
+            ],
+        ]);
         if ($this->getRequest()->is(['post','put','patch'])) {
             /** @var array $postData */
             $postData = $this->getRequest()->getData();
@@ -122,9 +126,10 @@ class EmployeesController extends AppController
                 $this->response = $this->response->withStatus(400);
             }
         }
-
+        $departments = $this->Employees->Departments->find('list')->orderDesc('name');
         $this->set('titleForLayout', __('Edit Employee Data'));
         $this->set('employee', $employee);
+        $this->set('departments', $departments);
     }
 
     /**
